@@ -99,6 +99,25 @@ function Main() {
     if (!(route.page === 'ch' && route.b)) window.scrollTo(0, 0)
   }, [route.page, route.a, route.b])
 
+  // 印刷時は折りたたみ（発展）をすべて開き、終わったら元に戻す
+  useEffect(() => {
+    let opened = []
+    const before = () => {
+      opened = [...document.querySelectorAll('details:not([open])')]
+      opened.forEach((d) => { d.open = true })
+    }
+    const after = () => {
+      opened.forEach((d) => { d.open = false })
+      opened = []
+    }
+    window.addEventListener('beforeprint', before)
+    window.addEventListener('afterprint', after)
+    return () => {
+      window.removeEventListener('beforeprint', before)
+      window.removeEventListener('afterprint', after)
+    }
+  }, [])
+
   let content
   switch (route.page) {
     case 'ch':
@@ -128,7 +147,10 @@ function Main() {
       <Header onMenu={() => setMenu((v) => !v)} route={route} />
       <div className="layout">
         <Sidebar open={menu} onClose={() => setMenu(false)} route={route} />
-        <main className="main" id="main">{content}</main>
+        <main className="main" id="main">
+          {content}
+          <p className="print-footer">電磁気ナビ　{window.location.href}</p>
+        </main>
       </div>
     </div>
   )

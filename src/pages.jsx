@@ -39,6 +39,10 @@ function CopyBtn({ getText, label = 'コピー' }) {
   )
 }
 
+function PrintBtn() {
+  return <button className="action-btn print-btn" onClick={() => window.print()}>⎙ 印刷</button>
+}
+
 function FaqCard({ f }) {
   return (
     <a className="faq-card" href={`#/faq/${f.id}`}>
@@ -134,6 +138,7 @@ export function ChapterPage({ chapter, sectionId }) {
         </div>
         <h1>{chapter.title}</h1>
         <p className="ch-sub">{chapter.subtitle}</p>
+        <PrintBtn />
       </header>
 
       <nav className="ch-toc" aria-label="この章の目次">
@@ -253,6 +258,7 @@ export function FaqDetailPage({ id }) {
           <h2><span className="qa-mark a">A</span>回答</h2>
           <div className="sec-tools">
             <CopyBtn label="回答文をコピー" getText={answerText} />
+            <PrintBtn />
           </div>
         </div>
         <Blocks blocks={f.answer} />
@@ -341,7 +347,7 @@ export function GlossaryPage({ focus }) {
 
   return (
     <div className="page">
-      <h1>用語集</h1>
+      <div className="title-row"><h1>用語集</h1><PrintBtn /></div>
       <p className="lead">「かみ砕いた説明」で生徒にイメージを、「正確な定義」で厳密さを。切り替えて使えます。</p>
       <div className="filters">
         <input type="search" placeholder="用語を絞り込み" value={text} onChange={(e) => setText(e.target.value)} aria-label="用語を絞り込み" />
@@ -374,7 +380,7 @@ export function FormulaPage() {
   const groups = [...new Set(formulas.map((f) => f.group))]
   return (
     <div className="page">
-      <h1>公式集 ― 根拠と適用条件つき</h1>
+      <div className="title-row"><h1>公式集 ― 根拠と適用条件つき</h1><PrintBtn /></div>
       <p className="lead">公式は「どの原理から出てくるか」「いつ使ってよいか」とセットで覚えましょう。定性的な性質や公式を言葉だけで覚えると、適用条件を見誤りやすくなります。</p>
       {groups.map((g) => (
         <section key={g} className="formula-group">

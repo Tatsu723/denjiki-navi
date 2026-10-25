@@ -24,7 +24,7 @@
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
+@media screen and (prefers-color-scheme: dark) {
   :root {
     --bg: #12161d;
     --surface: #1a2029;
@@ -271,6 +271,9 @@ tbody th { background: var(--surface-2); font-weight: 700; white-space: nowrap; 
 .filters input[type='search'] { flex: 1; min-width: 200px; }
 .count { color: var(--muted); font-size: 14px; margin: 6px 0 10px; }
 .back { font-size: 14px; }
+.title-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.ch-header .print-btn { margin-top: 4px; }
+.print-footer { display: none; }
 .faq-q-big { display: flex; gap: 14px; align-items: flex-start; margin-top: 12px; }
 .faq-q-big h1 { font-size: 22px; margin: 0; line-height: 1.6; }
 .faq-meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 12px 0 18px 52px; }
@@ -362,7 +365,18 @@ tbody th { background: var(--surface-2); font-weight: 700; white-space: nowrap; 
 }
 
 @media print {
-  .topbar, .sidebar, .sec-tools, .pager, .ch-toc { display: none !important; }
+  @page { margin: 15mm 14mm; }
+  html, body { background: #fff; font-size: 11pt; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .topbar, .sidebar, .scrim, .sec-tools, .pager, .ch-toc, .print-btn, .back, .filters, .faq-links { display: none !important; }
+  .layout { display: block; max-width: none; }
   .main { padding: 0; }
-  .box-adv:not([open]) .box-body { display: block; }
+  .page { max-width: none; }
+  a { color: inherit; }
+  .box-adv > summary::after { content: none; }
+  h1, h2, h3, .sec-head, .answer-head, .box-head { break-after: avoid; }
+  .box, .fig, .formula, .math-display, .setting, .short-answer, .viewpoint, .g-item, .faq-card, table { break-inside: avoid; }
+  .faq-grid, .formula-list, .card-grid { display: block; }
+  .faq-card, .formula { margin-bottom: 10px; box-shadow: none; }
+  .print-footer { display: block; margin-top: 28px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 9pt; color: var(--muted); word-break: break-all; }
 }

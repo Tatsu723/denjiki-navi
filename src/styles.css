@@ -368,7 +368,7 @@ tbody th { background: var(--surface-2); font-weight: 700; white-space: nowrap; 
   @page { margin: 15mm 14mm; }
   html, body { background: #fff; font-size: 11pt; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .topbar, .sidebar, .scrim, .sec-tools, .pager, .ch-toc, .print-btn, .back, .filters, .faq-links { display: none !important; }
+  .topbar, .sidebar, .scrim, .sec-tools, .pager, .ch-toc, .print-btn, .back, .filters, .faq-links, .related-faqs { display: none !important; }
   .layout { display: block; max-width: none; }
   .main { padding: 0; }
   .page { max-width: none; }

@@ -161,7 +161,7 @@ export function ChapterPage({ chapter, sectionId }) {
       ))}
 
       {related.length > 0 && (
-        <section id="sec-related" className="ch-section">
+        <section id="sec-related" className="ch-section related-faqs">
           <h2>この章に関連する質問</h2>
           <div className="faq-grid">{related.map((f) => <FaqCard key={f.id} f={f} />)}</div>
         </section>
@@ -192,7 +192,7 @@ export function FaqListPage() {
 
   return (
     <div className="page">
-      <h1>よくある質問 Q&A</h1>
+      <div className="title-row"><h1>よくある質問 Q&A</h1><PrintBtn /></div>
       <p className="lead">受験生から実際に寄せられた質問と、その回答の着眼点です。「ひとことで」は、まず押さえてほしい要点です。</p>
       <div className="filters">
         <input type="search" placeholder="質問を絞り込み" value={text} onChange={(e) => setText(e.target.value)} aria-label="Q&Aを絞り込み" />
